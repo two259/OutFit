@@ -2,12 +2,13 @@ package com.example.outfit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button registerButton;
     EditText firstnameText;
@@ -16,6 +17,8 @@ public class RegistrationActivity extends AppCompatActivity {
     EditText emailText;
     EditText passwordText;
     EditText confirmPasswordText;
+
+    Intent mainActivityIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,5 +32,16 @@ public class RegistrationActivity extends AppCompatActivity {
         emailText = findViewById(R.id.emailRegText);
         passwordText = findViewById(R.id.passwordText);
         confirmPasswordText = findViewById(R.id.confirmPasswordRegText);
+
+        registerButton.setOnClickListener(this);
+
+        mainActivityIntent = new Intent(this, MainActivity.class);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == registerButton.getId()){
+            this.startActivity(mainActivityIntent);
+        }
     }
 }
