@@ -33,6 +33,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         passwordText = findViewById(R.id.passwordText);
         confirmPasswordText = findViewById(R.id.confirmPasswordRegText);
 
+        registerButton.setOnClickListener(this);
+
         mainActivityIntent = new Intent(this, MainActivity.class);
     }
 
