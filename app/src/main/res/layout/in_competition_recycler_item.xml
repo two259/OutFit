@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#353535">
+
+    <TextView
+        android:id="@+id/competitionName"
+        android:layout_width="328dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Competition Name"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/dateBox"
+        android:layout_width="337dp"
+        android:layout_height="42dp"
+        android:layout_below="@+id/competitionName"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Start Date - Finish Date"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/viewDetailsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-59dp"
+        android:layout_marginTop="40dp"
+        android:layout_toEndOf="@+id/competitionName"
+        android:text="View Details"
+        android:textColor="@color/white" />
+
+</RelativeLayout>
