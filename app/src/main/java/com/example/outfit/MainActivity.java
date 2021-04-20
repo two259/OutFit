@@ -29,14 +29,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         passwordText = findViewById(R.id.passwordText);
 
         signUpButton.setOnClickListener(this);
+        loginButton.setOnClickListener(this);
 
         loadRegistrationScreen = new Intent(this, RegistrationActivity.class);
-        //loadHomeScreen = new Intent(this, HomeActivity.class);
+        loadHomeScreen = new Intent(this, HomeActivity.class);
     }
 
     public void onClick(View view){
         if(view.getId() == signUpButton.getId()){
             this.startActivity(loadRegistrationScreen);
+        }
+        if(view.getId() == loginButton.getId()){
+            this.startActivity(loadHomeScreen);
         }
     }
 }
