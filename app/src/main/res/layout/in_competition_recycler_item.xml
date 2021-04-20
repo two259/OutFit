@@ -29,4 +29,14 @@
         android:textColor="@color/white"
         android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/viewDetailsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="-59dp"
+        android:layout_marginTop="40dp"
+        android:layout_toEndOf="@+id/competitionName"
+        android:text="View Details"
+        android:textColor="@color/white" />
+
 </RelativeLayout>
