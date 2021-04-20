@@ -73,7 +73,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             return;
         }
         if (user.isEmpty()){
-            usernameText.setError("Enter Valid User Name");
+            usernameText.setError("Enter Valid Username");
             usernameText.requestFocus();
             return;
         }
@@ -87,7 +87,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             passwordText.requestFocus();
             return;
         }
-        Toast.makeText(RegistrationActivity.this, "Fish", Toast.LENGTH_LONG).show();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

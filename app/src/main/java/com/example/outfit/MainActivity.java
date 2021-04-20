@@ -1,5 +1,6 @@
 package com.example.outfit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,13 +8,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button loginButton;
     Button signUpButton;
-    EditText usernameText;
-    EditText passwordText;
+    EditText usernameT;
+    EditText passwordT;
+
+    private FirebaseAuth mAuth;
 
     Intent loadRegistrationScreen;
     Intent loadHomeScreen;
@@ -25,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         loginButton = findViewById(R.id.loginButton);
         signUpButton = findViewById(R.id.signUpButton);
-        usernameText = findViewById(R.id.usernameText);
-        passwordText = findViewById(R.id.passwordText);
+        usernameT = findViewById(R.id.usernameText);
+        passwordT = findViewById(R.id.passwordText);
 
         signUpButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
@@ -40,7 +49,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             this.startActivity(loadRegistrationScreen);
         }
         if(view.getId() == loginButton.getId()){
-            this.startActivity(loadHomeScreen);
+            String email = usernameT.getText().toString().trim();
+            String password = passwordT.getText().toString().trim();
+            mAuth = FirebaseAuth.getInstance();
+            if (email.isEmpty()){
+                usernameT.setError("Enter Valid Email");
+                usernameT.requestFocus();
+                return;
+            }
+
+            if (password.isEmpty()){
+                passwordT.setError("Enter Valid Password");
+                passwordT.requestFocus();
+                return;
+            }
+
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()){
+                        MainActivity.this.startActivity(loadHomeScreen);
+                    }
+                    else{
+                        Toast.makeText(MainActivity.this, "Incorrect Username Or Password", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+
         }
     }
 }
