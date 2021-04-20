@@ -6,6 +6,8 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,7 +43,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         lastnameText = findViewById(R.id.lastnameRegText);
         usernameText = findViewById(R.id.usernameRegText);
         emailText = findViewById(R.id.emailRegText);
-        passwordText = findViewById(R.id.passwordText);
+        passwordText = findViewById(R.id.passwordRegText);
         confirmPasswordText = findViewById(R.id.confirmPasswordRegText);
         mAuth = FirebaseAuth.getInstance();
 
@@ -55,11 +57,11 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View view) {
 
-        String first = firstnameText.toString().trim();
-        String last = lastnameText.toString().trim();
-        String user = usernameText.toString().trim();
-        String email = emailText.toString().trim();
-        String password = passwordText.toString().trim();
+        String first = firstnameText.getText().toString().trim();
+        String last = lastnameText.getText().toString().trim();
+        String user = usernameText.getText().toString().trim();
+        String email = emailText.getText().toString().trim();
+        String password = passwordText.getText().toString().trim();
         if (first.isEmpty()){
             firstnameText.setError("Enter Valid First Name");
             firstnameText.requestFocus();
@@ -75,7 +77,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             usernameText.requestFocus();
             return;
         }
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (email.isEmpty()){
             emailText.setError("Enter Valid Email");
             emailText.requestFocus();
             return;
@@ -85,6 +87,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             passwordText.requestFocus();
             return;
         }
+        Toast.makeText(RegistrationActivity.this, "Fish", Toast.LENGTH_LONG).show();
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -92,35 +95,21 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             User newUser = new User(first, last, user, email, password);
-
-                            FirebaseDatabase
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(newUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()){
+                                        Toast.makeText(RegistrationActivity.this, "Successfully Registered", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
                         }
                     }
                 });
 
         if(view.getId() == registerButton.getId()){
-            /**
-            mAuth.createUserWithEmailAndPassword(emailText.toString(), passwordText.toString())
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                updateUI(user);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                                updateUI(null);
-                            }
-
-                            // ...
-                        }
-                    });
-         */
             this.startActivity(mainActivityIntent);
         }
     }
