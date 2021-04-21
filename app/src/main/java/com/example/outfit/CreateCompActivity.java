@@ -18,7 +18,6 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
     TextView competitionName;
     Button createCompetition;
     TextView competitionDescription;
-    BottomNavigationView bnv;
 
     // Need to add stuff for radio buttons.
 
@@ -27,10 +26,6 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_competition);
-
-        bnv = findViewById(R.id.bottom_navigation);
-        bnv.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
-        bnv.setSelectedItemId(R.id.navigation_competitions);
 
 
         competitionName = findViewById(R.id.competitionNameText);
@@ -46,45 +41,5 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
 
-    }
-
-    BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    if(item.getItemId() == R.id.navigation_home){ // Home tab
-                        //System.out.println("Home");
-                        startActivities(0);
-                        return true;
-                    }
-                    else if(item.getItemId() == R.id.navigation_competitions){ // Competitions tab
-                        //System.out.println("Competitions");
-                        startActivities(1);
-                        return true;
-                    }
-                    else if(item.getItemId() == R.id.navigation_social){ // Social/Messages tab
-                        //System.out.println("Social");
-                        return true;
-                    }
-                    else if(item.getItemId() == R.id.navigation_profile){ // Profile tab
-                        //System.out.println("Profile");
-                        return true;
-                    }
-                    return false;
-                }
-            };
-
-    public void startActivities(int id){
-        if(id == 0){
-            this.startActivity(loadHomeScreen);
-        }
-        else if(id == 1){
-            // Already in competitions.
-        }
-        else if(id == 2){
-
-        }
-        else if(id == 3){
-
-        }
     }
 }
