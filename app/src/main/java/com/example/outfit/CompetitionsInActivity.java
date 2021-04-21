@@ -29,6 +29,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.competitions_in_recycler);
         bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        bnv.setSelectedItemId(R.id.navigation_competitions);
         loadHomeScreen = new Intent(this, HomeActivity.class);
         rv = findViewById(R.id.in_competition_rec);
 
