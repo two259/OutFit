@@ -19,6 +19,7 @@
         <activity android:name=".RegistrationActivity"></activity>
         <activity android:name=".HomeActivity"></activity>
         <activity android:name=".CompetitionsInActivity"></activity>
+        <activity android:name=".CreateCompActivity"></activity>
     </application>
 
 </manifest>
