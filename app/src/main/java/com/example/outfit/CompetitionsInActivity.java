@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,9 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
     BottomNavigationView bnv;
     RecyclerView rv;
     InCompetitionAdapter adapter;
+    Button searchButton;
+    Button createButton;
+    TextView searchBar;
 
 
     @Override
@@ -32,6 +37,13 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
         bnv.setSelectedItemId(R.id.navigation_competitions);
         loadHomeScreen = new Intent(this, HomeActivity.class);
         rv = findViewById(R.id.in_competition_rec);
+
+        searchBar = findViewById(R.id.searchBarComp);
+        searchButton = findViewById(R.id.searchButton);
+        createButton = findViewById(R.id.createCompButton);
+
+        searchButton.setOnClickListener(this);
+        createButton.setOnClickListener(this);
 
         // Dummy data for presentation
         List<UserCompetitionsObj> temp = new ArrayList<UserCompetitionsObj>();
@@ -48,7 +60,12 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
 
     @Override
     public void onClick(View v) {
+        if(searchButton.getId() == v.getId()){ // Search button
 
+        }
+        else if(createButton.getId() == v.getId()){ // Create button
+
+        }
     }
 
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
