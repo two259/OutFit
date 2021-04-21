@@ -59,6 +59,8 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
         UserCompetitionsObj testComp8 = new UserCompetitionsObj("Competition 8", "3/01/2021", "6/01/2021");
         UserCompetitionsObj testComp9 = new UserCompetitionsObj("Competition 9", "5/21/2021", "6/21/2021");
         UserCompetitionsObj testComp10 = new UserCompetitionsObj("Competition 10", "4/21/2021", "6/21/2021");
+        UserCompetitionsObj testComp11 = new UserCompetitionsObj("", "", "");
+        UserCompetitionsObj testComp12 = new UserCompetitionsObj("", "", "");
         temp.add(testComp1);
         temp.add(testComp2);
         temp.add(testComp3);
@@ -69,6 +71,8 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
         temp.add(testComp8);
         temp.add(testComp9);
         temp.add(testComp10);
+        temp.add(testComp11);
+        temp.add(testComp12);
         adapter = new InCompetitionAdapter(this, temp);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
