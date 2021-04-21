@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
     BottomNavigationView bnv;
     Intent loadInCompetitionsScreen;
+    Intent loadCreateComp;
+    Button createCompetition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +27,18 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
+        createCompetition = findViewById(R.id.createCompButtonHome);
+        createCompetition.setOnClickListener(this);
+
         loadInCompetitionsScreen = new Intent(this, CompetitionsInActivity.class);
+        loadCreateComp = new Intent(this, CreateCompActivity.class);
     }
 
     @Override
     public void onClick(View v) {
-
+        if(v.getId() == createCompetition.getId()){
+            this.startActivity(loadCreateComp);
+        }
     }
 
     public void startActivities(int id){

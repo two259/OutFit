@@ -27,7 +27,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="672dp"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/placeholder2"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="Sideways recycler here once we have data."
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/placeholder3"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <TextView
+                android:id="@+id/createMess"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Don't see any competitions you like? Create your own!"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/createCompButtonHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Create Competition"
+                android:backgroundTint="#8BC34A"
+                android:textSize="18sp" />
+        </LinearLayout>
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
