@@ -1,51 +1,53 @@
 package com.example.outfit;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomnavigation.BottomNavigationMenu;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class ProfileActivity extends AppCompatActivity {
     BottomNavigationView bnv;
     Intent loadInCompetitionsScreen;
-    Intent loadCreateComp;
-    Button createCompetition;
-    Intent profileActivity;
+    Intent loadHomeScreen;
+
+    TextView username;
+    TextView userEmail;
+    ImageView profileImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.homescreen);
+        setContentView(R.layout.activity_profile);
+
+        //navigation bar setup
         bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        createCompetition = findViewById(R.id.createCompButtonHome);
-        createCompetition.setOnClickListener(this);
-
         loadInCompetitionsScreen = new Intent(this, CompetitionsInActivity.class);
-        loadCreateComp = new Intent(this, CreateCompActivity.class);
+        loadHomeScreen = new Intent(this, HomeActivity.class);
 
-        profileActivity = new Intent(this, ProfileActivity.class);
+        //screen view setup
+        username = findViewById(R.id.username);
+        userEmail = findViewById(R.id.userEmail);
+        profileImage = findViewById(R.id.profileImage);
+
+        //dummy data
+        username.setText(String.format("%15s", "UserID: ") + "kenling");
+        userEmail.setText(String.format("%15s", "UserEmail: ") + "kenling@vt.edu");
+
     }
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == createCompetition.getId()){
-            this.startActivity(loadCreateComp);
-        }
-    }
+
 
     public void startActivities(int id){
         if(id == 0){
-            // Already home, do nothing.
+            this.startActivity(loadHomeScreen);
         }
         else if(id == 1){
             this.startActivity(loadInCompetitionsScreen);
@@ -54,7 +56,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         }
         else if(id == 3){
-            this.startActivity(profileActivity);
+            //in profile screen
         }
     }
 
@@ -63,6 +65,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     if(item.getItemId() == R.id.navigation_home){ // Home tab
                         //System.out.println("Home");
+                        startActivities(0);
                         return true;
                     }
                     else if(item.getItemId() == R.id.navigation_competitions){ // Competitions tab
@@ -76,7 +79,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     else if(item.getItemId() == R.id.navigation_profile){ // Profile tab
                         //System.out.println("Profile");
-                        startActivities(3);
+                        //startActivities(3);
+
                         return true;
                     }
                     return false;
