@@ -18,7 +18,7 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
     TextView competitionName;
     Button createCompetition;
     TextView competitionDescription;
-
+    Intent loadSuccessScreen;
     // Need to add stuff for radio buttons.
 
 
@@ -35,11 +35,13 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
         createCompetition.setOnClickListener(this);
 
         loadHomeScreen = new Intent(this, HomeActivity.class);
-
+        loadSuccessScreen = new Intent(this, CompCreateJoinSuccessActivity.class);
     }
 
     @Override
     public void onClick(View v) {
-
+        if(v.getId() == createCompetition.getId()){
+            this.startActivity(loadSuccessScreen);
+        }
     }
 }

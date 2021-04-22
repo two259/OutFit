@@ -28,6 +28,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
     TextView searchBar;
 
     Intent loadCreateComp;
+    Intent loadSearchComp;
 
 
     @Override
@@ -79,13 +80,14 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
         adapter.notifyDataSetChanged();
 
         loadCreateComp = new Intent(this, CreateCompActivity.class);
+        loadSearchComp = new Intent(this, SearchCompActivity.class);
     }
 
 
     @Override
     public void onClick(View v) {
         if(searchButton.getId() == v.getId()){ // Search button
-
+            this.startActivity(loadSearchComp);
         }
         else if(createButton.getId() == v.getId()){ // Create button
             this.startActivity(loadCreateComp);

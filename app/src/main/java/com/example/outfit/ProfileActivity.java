@@ -28,6 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
         //navigation bar setup
         bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
+        bnv.setSelectedItemId(R.id.navigation_profile);
 
         loadInCompetitionsScreen = new Intent(this, CompetitionsInActivity.class);
         loadHomeScreen = new Intent(this, HomeActivity.class);

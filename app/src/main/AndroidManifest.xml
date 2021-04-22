@@ -21,6 +21,8 @@
         <activity android:name=".HomeActivity" />
         <activity android:name=".CompetitionsInActivity" />
         <activity android:name=".CreateCompActivity" />
+        <activity android:name=".SearchCompActivity" />
+        <activity android:name=".CompCreateJoinSuccessActivity" />
     </application>
 
 </manifest>

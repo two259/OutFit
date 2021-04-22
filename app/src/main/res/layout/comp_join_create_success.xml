@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#353535">
+
+    <TextView
+        android:id="@+id/successMessage"
+        android:layout_width="187dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="80dp"
+        android:text="Success!!"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/newEventMessage"
+        android:layout_width="340dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="48dp"
+        android:text="Your new event can now be found in your competitions list!"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/successMessage" />
+
+    <Button
+        android:id="@+id/buttonToCompList"
+        android:layout_width="278dp"
+        android:layout_height="71dp"
+        android:layout_marginTop="64dp"
+        android:backgroundTint="#00BCD4"
+        android:text="Awesome! Take me there!"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newEventMessage" />
+
+    <Button
+        android:id="@+id/buttonToHome"
+        android:layout_width="210dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#8BC34A"
+        android:text="Return to Home"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonToCompList"
+        app:layout_constraintVertical_bias="0.209" />
+</androidx.constraintlayout.widget.ConstraintLayout>
