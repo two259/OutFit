@@ -1,5 +1,6 @@
 package com.example.outfit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchCompActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchCompActivity extends AppCompatActivity implements JoinableCompetitionAdapter.ClickJoinItemListener {
 
     RecyclerView joinableCompetitions;
     JoinableCompetitionAdapter jca;
@@ -27,15 +28,19 @@ public class SearchCompActivity extends AppCompatActivity implements View.OnClic
         temp.add(testComp2);
 
         joinableCompetitions = findViewById(R.id.searchRV);
-        jca = new JoinableCompetitionAdapter(this, temp);
+        jca = new JoinableCompetitionAdapter(this, temp, this);
 
         joinableCompetitions.setAdapter(jca);
         joinableCompetitions.setLayoutManager(new LinearLayoutManager(this));
         jca.notifyDataSetChanged();
     }
 
-    @Override
-    public void onClick(View v) {
 
+    @Override
+    public void clickedJoinItem(int position) {
+        // Remember to get other info needed from the position index and send it.
+
+        Intent loadJoinScreen = new Intent(this, JoinCompetitionActivity.class);
+        this.startActivity(loadJoinScreen);
     }
 }

@@ -15,17 +15,19 @@ public class JoinableCompetitionAdapter extends RecyclerView.Adapter<JoinableCom
 
     Context context;
     List<JoinableCompetitionObj> joinableCompetitionList;
+    ClickJoinItemListener clickJoinItemListener;
 
-    public JoinableCompetitionAdapter(Context context, List<JoinableCompetitionObj> list) {
+    public JoinableCompetitionAdapter(Context context, List<JoinableCompetitionObj> list, ClickJoinItemListener cjil) {
         this.joinableCompetitionList = list;
         this.context = context;
+        this.clickJoinItemListener = cjil;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View searchCompView = LayoutInflater.from(context).inflate(R.layout.search_comp_recycler_item, parent, false);
-        return new ViewHolder(searchCompView);
+        return new ViewHolder(searchCompView, clickJoinItemListener);
     }
 
     @Override
@@ -40,21 +42,33 @@ public class JoinableCompetitionAdapter extends RecyclerView.Adapter<JoinableCom
         return joinableCompetitionList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView competitionName;
         TextView competitionDate;
+        ClickJoinItemListener clickJoinItemListener;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, ClickJoinItemListener cjil) {
             super(itemView);
             competitionName = itemView.findViewById(R.id.compNameSearch);
             competitionDate = itemView.findViewById(R.id.startfinishdate);
+            this.clickJoinItemListener = cjil;
+            itemView.setOnClickListener(this);
         }
 
         public void bind(JoinableCompetitionObj uco) {
             competitionName.setText(uco.getCompetitionName());
             competitionDate.setText(uco.getCompetitionStartDate()+" - " +uco.getCompetitionEndDate());
         }
+
+        @Override
+        public void onClick(View v) {
+            clickJoinItemListener.clickedJoinItem(getAdapterPosition());
+        }
+    }
+
+    public interface ClickJoinItemListener {
+        void clickedJoinItem(int position);
     }
 
 }

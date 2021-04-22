@@ -17,7 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompetitionsInActivity extends AppCompatActivity implements View.OnClickListener{
+public class CompetitionsInActivity extends AppCompatActivity implements InCompetitionAdapter.ClickInCompItemListener, View.OnClickListener {
 
     Intent loadHomeScreen;
     BottomNavigationView bnv;
@@ -29,6 +29,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
 
     Intent loadCreateComp;
     Intent loadSearchComp;
+    Intent loadProfile;
 
 
     @Override
@@ -74,13 +75,14 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
         temp.add(testComp10);
         temp.add(testComp11);
         temp.add(testComp12);
-        adapter = new InCompetitionAdapter(this, temp);
+        adapter = new InCompetitionAdapter(this, temp, this);
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter.notifyDataSetChanged();
 
         loadCreateComp = new Intent(this, CreateCompActivity.class);
         loadSearchComp = new Intent(this, SearchCompActivity.class);
+        loadProfile = new Intent(this, ProfileActivity.class);
     }
 
 
@@ -130,7 +132,15 @@ public class CompetitionsInActivity extends AppCompatActivity implements View.On
 
         }
         else if(id == 3){
-
+            this.startActivity(loadProfile);
         }
+    }
+
+    @Override
+    public void clickedInCompItem(int position) {
+        // Remember to get other info needed from the position index and send it.
+
+        Intent loadCompScreen = new Intent(this, JoinCompetitionActivity.class); // Change the class when its made.
+        this.startActivity(loadCompScreen);
     }
 }
