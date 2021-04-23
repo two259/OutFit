@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:backgroundTint="#8BC34A"
-                android:text="Create Competion" />
+                android:text="Create Competition" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/in_competition_rec"
