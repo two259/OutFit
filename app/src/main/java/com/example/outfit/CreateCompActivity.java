@@ -94,7 +94,7 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
                 Toast.makeText(this, "Please enter a valid end date.", Toast.LENGTH_LONG).show();
                 return;
             }
-            Competition currCompetition = new Competition(compName, eventDesc, startDate, endDate, competitionType);
+            Competition currCompetition = new Competition(compName, eventDesc, startDate, endDate, competitionType, 0);
 
             FirebaseDatabase.getInstance().getReference("numcompetitions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
@@ -103,7 +103,6 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
 
                     }
                     else {
-                        Log.d("firebase", String.valueOf(task.getResult().getValue()));
                         numCompetitions = Integer.valueOf(String.valueOf(task.getResult().getValue()));
                     }
                 }
@@ -113,6 +112,7 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    currCompetition.setCompetitionID(numCompetitions);
                     FirebaseDatabase.getInstance().getReference("Competition")
                             .child(String.valueOf(numCompetitions))
                             .setValue(currCompetition).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -127,7 +127,7 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
                     });
                 }
             }, 2000);
-
+            currCompetition.setCompetitionID(numCompetitions);
             this.startActivity(loadSuccessScreen);
         }
     }
