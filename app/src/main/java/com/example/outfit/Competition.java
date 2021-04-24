@@ -1,5 +1,8 @@
 package com.example.outfit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Competition {
 
     private String competitionName;
@@ -8,6 +11,7 @@ public class Competition {
     private String endDate;
     private String competitionType;
     private int competitionID;
+    private List<UserInComp> userList;
 
     public Competition(String name, String desc, String start, String end, String type, int compID){
         this.competitionName = name;
@@ -16,6 +20,7 @@ public class Competition {
         this.endDate = end;
         this.competitionType = type;
         this.competitionID = compID;
+        userList = new ArrayList<UserInComp>();
     }
 
     public String getCompetitionName() {
@@ -44,5 +49,9 @@ public class Competition {
 
     public void setCompetitionID(int newID){
         this.competitionID = newID;
+    }
+
+    public List<UserInComp> getUserList(){
+        return userList;
     }
 }

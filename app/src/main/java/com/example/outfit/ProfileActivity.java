@@ -41,7 +41,6 @@ public class ProfileActivity extends AppCompatActivity {
         //dummy data
         username.setText(String.format("%15s", "UserID: ") + "kenling");
         userEmail.setText(String.format("%15s", "UserEmail: ") + "kenling@vt.edu");
-
     }
 
 
