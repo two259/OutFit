@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.List;
+
 public class CreateCompActivity extends AppCompatActivity implements View.OnClickListener {
 
     int numCompetitions;
@@ -94,7 +96,7 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
                 Toast.makeText(this, "Please enter a valid end date.", Toast.LENGTH_LONG).show();
                 return;
             }
-            Competition currCompetition = new Competition(compName, eventDesc, startDate, endDate, competitionType);
+            Competition currCompetition = new Competition(compName, eventDesc, startDate, endDate, competitionType, 0);
 
             FirebaseDatabase.getInstance().getReference("numcompetitions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
@@ -103,7 +105,6 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
 
                     }
                     else {
-                        Log.d("firebase", String.valueOf(task.getResult().getValue()));
                         numCompetitions = Integer.valueOf(String.valueOf(task.getResult().getValue()));
                     }
                 }
@@ -113,6 +114,11 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    currCompetition.setCompetitionID(numCompetitions);
+                    List<UserInComp> tempList = currCompetition.getUserList();
+                    String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    UserInComp tempUser = new UserInComp(userID);
+                    tempList.add(tempUser);
                     FirebaseDatabase.getInstance().getReference("Competition")
                             .child(String.valueOf(numCompetitions))
                             .setValue(currCompetition).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -120,6 +126,16 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(CreateCompActivity.this, "Successfully Created", Toast.LENGTH_LONG).show();
+                                FirebaseDatabase.getInstance().getReference("Users")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("UserCompetitions").child(String.valueOf(numCompetitions))
+                                        .setValue(currCompetition).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+
+                                        }
+                                    }
+                                });
                                 numCompetitions++;
                                 FirebaseDatabase.getInstance().getReference("numcompetitions").setValue(numCompetitions);
                             }
