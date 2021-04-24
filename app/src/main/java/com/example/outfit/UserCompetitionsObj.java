@@ -5,11 +5,13 @@ public class UserCompetitionsObj {
     private String competitionName;
     private String competitionStartDate;
     private String competitionEndDate;
+    private int competitionID;
 
-    public UserCompetitionsObj(String name, String start, String end){
+    public UserCompetitionsObj(String name, String start, String end, int id){
         this.competitionName = name;
         this.competitionStartDate = start;
         this.competitionEndDate = end;
+        this.competitionID = id;
     }
 
     public String getCompetitionName() {
@@ -22,5 +24,9 @@ public class UserCompetitionsObj {
 
     public String getCompetitionEndDate() {
         return competitionEndDate;
+    }
+
+    public int getCompetitionID() {
+        return competitionID;
     }
 }

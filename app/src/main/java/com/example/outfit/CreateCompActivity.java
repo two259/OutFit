@@ -126,9 +126,10 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(CreateCompActivity.this, "Successfully Created", Toast.LENGTH_LONG).show();
+                                UserCompetitionsObj tempUserObj = new UserCompetitionsObj(currCompetition.getCompetitionName(), currCompetition.getStartDate(), currCompetition.getEndDate(), currCompetition.getCompetitionID());
                                 FirebaseDatabase.getInstance().getReference("Users")
                                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("UserCompetitions").child(String.valueOf(numCompetitions))
-                                        .setValue(currCompetition).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        .setValue(tempUserObj).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()){

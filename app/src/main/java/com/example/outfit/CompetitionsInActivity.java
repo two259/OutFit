@@ -2,8 +2,10 @@ package com.example.outfit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
@@ -34,6 +38,8 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
     Intent loadCreateComp;
     Intent loadSearchComp;
     Intent loadProfile;
+
+    List<UserCompetitionsObj> temp;
 
 
     @Override
@@ -54,7 +60,8 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
         createButton.setOnClickListener(this);
 
         // Dummy data for presentation
-        List<UserCompetitionsObj> temp = new ArrayList<UserCompetitionsObj>();
+        temp = new ArrayList<UserCompetitionsObj>();
+        /*
         UserCompetitionsObj testComp1 = new UserCompetitionsObj("Competition 1", "4/21/2021", "5/21/2021");
         UserCompetitionsObj testComp2 = new UserCompetitionsObj("Competition 2", "4/21/2021", "6/21/2021");
         UserCompetitionsObj testComp3 = new UserCompetitionsObj("Competition 3", "4/25/2021", "4/28/2021");
@@ -79,14 +86,37 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
         temp.add(testComp10);
         temp.add(testComp11);
         temp.add(testComp12);
-        adapter = new InCompetitionAdapter(this, temp, this);
-        rv.setAdapter(adapter);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        adapter.notifyDataSetChanged();
+         */
 
+        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("UserCompetitions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+
+                }
+                else {
+                    //temp = (List<Competition>) task.getResult().getValue(List<Competition>);
+                    System.out.println(task.getResult().getValue().toString());
+                }
+            }
+        });
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                updateRecycler();
+            }
+        }, 2000);
+
+//        adapter = new InCompetitionAdapter(CompetitionsInActivity.this, temp, CompetitionsInActivity.this);
+//        rv.setAdapter(adapter);
+//        rv.setLayoutManager(new LinearLayoutManager(CompetitionsInActivity.this));
+//        adapter.notifyDataSetChanged();
         loadCreateComp = new Intent(this, CreateCompActivity.class);
         loadSearchComp = new Intent(this, SearchCompActivity.class);
         loadProfile = new Intent(this, ProfileActivity.class);
+        //System.out.println("List size: " +temp.size());
     }
 
 
@@ -146,5 +176,12 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
 
         Intent loadCompScreen = new Intent(this, JoinCompetitionActivity.class); // Change the class when its made.
         this.startActivity(loadCompScreen);
+    }
+
+    private void updateRecycler(){
+        adapter = new InCompetitionAdapter(CompetitionsInActivity.this, temp, CompetitionsInActivity.this);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(CompetitionsInActivity.this));
+        adapter.notifyDataSetChanged();
     }
 }
