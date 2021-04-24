@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ public class ProfileActivity extends AppCompatActivity {
     BottomNavigationView bnv;
     Intent loadInCompetitionsScreen;
     Intent loadHomeScreen;
+    Intent loadEditProfile;
 
     TextView username;
     TextView userEmail;
@@ -32,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         loadInCompetitionsScreen = new Intent(this, CompetitionsInActivity.class);
         loadHomeScreen = new Intent(this, HomeActivity.class);
-
+        loadEditProfile = new Intent(this, EditProfileActivity.class);
         //screen view setup
         username = findViewById(R.id.username);
         userEmail = findViewById(R.id.userEmail);
@@ -43,8 +45,18 @@ public class ProfileActivity extends AppCompatActivity {
         userEmail.setText(String.format("%15s", "UserEmail: ") + "kenling@vt.edu");
     }
 
+    /**
+     * go to edit_profile_activity
+     * @param view
+     */
+    public void loadEditProfile(View view){
+        startActivity(loadEditProfile);
+    }
 
-
+    /**
+     * switch screens through bottom navgation bar
+     * @param id
+     */
     public void startActivities(int id){
         if(id == 0){
             this.startActivity(loadHomeScreen);
