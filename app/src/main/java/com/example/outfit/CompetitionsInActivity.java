@@ -95,8 +95,19 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
 
                 }
                 else {
-                    //temp = (List<Competition>) task.getResult().getValue(List<Competition>);
-                    System.out.println(task.getResult().getValue().toString());
+                    if(task.getResult().getValue() == null){
+                        // Do nothing
+                    }
+                    else{
+                        String data = task.getResult().getValue().toString();
+                        System.out.println(data);
+                        parseData(data);
+                        if(data.equals("")) System.out.println("Blank");
+                        adapter = new InCompetitionAdapter(CompetitionsInActivity.this, temp, CompetitionsInActivity.this);
+                        rv.setAdapter(adapter);
+                        rv.setLayoutManager(new LinearLayoutManager(CompetitionsInActivity.this));
+                        adapter.notifyDataSetChanged();
+                    }
                 }
             }
         });
@@ -109,10 +120,10 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
             }
         }, 2000);
 
-//        adapter = new InCompetitionAdapter(CompetitionsInActivity.this, temp, CompetitionsInActivity.this);
-//        rv.setAdapter(adapter);
-//        rv.setLayoutManager(new LinearLayoutManager(CompetitionsInActivity.this));
-//        adapter.notifyDataSetChanged();
+        adapter = new InCompetitionAdapter(CompetitionsInActivity.this, temp, CompetitionsInActivity.this);
+        rv.setAdapter(adapter);
+        rv.setLayoutManager(new LinearLayoutManager(CompetitionsInActivity.this));
+        adapter.notifyDataSetChanged();
         loadCreateComp = new Intent(this, CreateCompActivity.class);
         loadSearchComp = new Intent(this, SearchCompActivity.class);
         loadProfile = new Intent(this, ProfileActivity.class);
@@ -183,5 +194,36 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
         rv.setAdapter(adapter);
         rv.setLayoutManager(new LinearLayoutManager(CompetitionsInActivity.this));
         adapter.notifyDataSetChanged();
+    }
+
+    private void parseData(String data){
+        String[] checker = data.split("\\}"); // This will count how many items there are to parse.
+        int numRecords = checker.length;
+        for(int i = 0; i < numRecords - 1; i++){
+            if(i == 0){
+                String curr = checker[i];
+                String[] secondSplitter = curr.split(",");
+                int equalIndex = secondSplitter[0].indexOf("=");
+                String endDate = secondSplitter[0].substring(equalIndex + 1, secondSplitter[0].length());
+                int compID = Integer.valueOf(secondSplitter[1].substring(secondSplitter[1].indexOf("=")+1, secondSplitter[1].length()));
+                String compName = secondSplitter[2].substring(secondSplitter[2].indexOf("=") + 1, secondSplitter[2].length());
+                equalIndex = secondSplitter[3].indexOf("=");
+                String startDate = secondSplitter[3].substring(equalIndex + 1, secondSplitter[3].length());
+                UserCompetitionsObj tempUser = new UserCompetitionsObj(compName, startDate, endDate, compID);
+                temp.add(tempUser);
+            }
+            else{
+                String curr = checker[i];
+                String[] secondSplitter = curr.split(",");
+                int equalIndex = secondSplitter[1].indexOf("=");
+                String endDate = secondSplitter[1].substring(equalIndex + 1, secondSplitter[1].length());
+                int compID = Integer.valueOf(secondSplitter[2].substring(secondSplitter[2].indexOf("=")+1, secondSplitter[2].length()));
+                String compName = secondSplitter[3].substring(secondSplitter[3].indexOf("=") + 1, secondSplitter[3].length());
+                equalIndex = secondSplitter[4].indexOf("=");
+                String startDate = secondSplitter[4].substring(equalIndex + 1, secondSplitter[4].length());
+                UserCompetitionsObj tempUser = new UserCompetitionsObj(compName, startDate, endDate, compID);
+                temp.add(tempUser);
+            }
+        }
     }
 }
