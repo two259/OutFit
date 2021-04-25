@@ -3,7 +3,10 @@ package com.example.outfit;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button signUpButton;
     EditText usernameT;
     EditText passwordT;
+    EditText steps;
 
     private FirebaseAuth mAuth;
 
@@ -29,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        SensorManager deviceSensor = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        Sensor countSensor = deviceSensor.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -36,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         signUpButton = findViewById(R.id.signUpButton);
         usernameT = findViewById(R.id.usernameText);
         passwordT = findViewById(R.id.passwordText);
+        steps = findViewById(R.id.steps);
 
         signUpButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
@@ -64,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
 
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
