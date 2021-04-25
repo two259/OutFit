@@ -159,7 +159,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
     public void clickedInCompItem(int position) {
         // Remember to get other info needed from the position index and send it.
 
-        Intent loadCompScreen = new Intent(this, JoinCompetitionActivity.class); // Change the class when its made.
+        Intent loadCompScreen = new Intent(this, CompetitionOverviewActivity.class); // Change the class when its made.
         this.startActivity(loadCompScreen);
     }
 
@@ -172,9 +172,14 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
 
     private void parseData(String data){
         String[] checker = data.split("\\}"); // This will count how many items there are to parse.
+        //System.out.println(data);
         int numRecords = checker.length;
         for(int i = 0; i < numRecords - 1; i++){
-            if(i == 0){
+            System.out.println(checker[i]);
+            if(checker[i] == null){
+
+            }
+            else if(i == 0){
                 String curr = checker[i];
                 String[] secondSplitter = curr.split(",");
                 int equalIndex = secondSplitter[0].indexOf("=");
