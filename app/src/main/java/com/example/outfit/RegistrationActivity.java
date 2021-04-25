@@ -59,7 +59,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View view) {
-
         String first = firstnameText.getText().toString().trim();
         String last = lastnameText.getText().toString().trim();
         String user = usernameText.getText().toString().trim();
@@ -92,7 +91,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
         }
 
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
@@ -108,8 +107,12 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                 }
                             });
                         }
+                        else{
+                            Toast.makeText(RegistrationActivity.this, "here", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
+
 
         if(view.getId() == registerButton.getId()){
             this.startActivity(mainActivityIntent);
