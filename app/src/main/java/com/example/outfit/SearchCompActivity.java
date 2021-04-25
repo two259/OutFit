@@ -116,6 +116,43 @@ public class SearchCompActivity extends AppCompatActivity implements JoinableCom
                 }
             }
             else{ // Filter by the searched word.
+                FirebaseDatabase.getInstance().getReference("numcompetitions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        numCompetitions = Integer.valueOf(String.valueOf(task.getResult().getValue()));
+                        countDownLatch.countDown();
+                    }
+                });
+                try {
+                    countDownLatch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                for(int i = 0; i < numCompetitions; i++){
+                    FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(i)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            DataSnapshot dataSnapshot = task.getResult();
+                            String compName = dataSnapshot.child("competitionName").getValue(String.class);
+                            ArrayList test = (ArrayList) dataSnapshot.child("userList").getValue();
+                            String compDesc = dataSnapshot.child("compDescription").getValue(String.class);
+                            int compID = dataSnapshot.child("competitionID").getValue(Integer.class);
+                            String compType = dataSnapshot.child("competitionType").getValue(String.class);
+                            String startDate = dataSnapshot.child("startDate").getValue(String.class);
+                            String endDate = dataSnapshot.child("endDate").getValue(String.class);
+                            Competition tempComp = new Competition(compName, compDesc, startDate, endDate, compType, compID);
+                            boolean check = checkInList(test);
+                            if(!check){
+                                if(compName.contains(searchString)){
+                                    JoinableCompetitionObj tempCompJoin = new JoinableCompetitionObj(compName, startDate, endDate, compID);
+                                    joinList.add(tempCompJoin);
+                                    updateRecycler();
+                                }
+                            }
+                        }
+
+                    });
+                }
 
             }
             return null;

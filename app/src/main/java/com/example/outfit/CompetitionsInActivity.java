@@ -59,34 +59,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
         searchButton.setOnClickListener(this);
         createButton.setOnClickListener(this);
 
-        // Dummy data for presentation
         temp = new ArrayList<UserCompetitionsObj>();
-        /*
-        UserCompetitionsObj testComp1 = new UserCompetitionsObj("Competition 1", "4/21/2021", "5/21/2021");
-        UserCompetitionsObj testComp2 = new UserCompetitionsObj("Competition 2", "4/21/2021", "6/21/2021");
-        UserCompetitionsObj testComp3 = new UserCompetitionsObj("Competition 3", "4/25/2021", "4/28/2021");
-        UserCompetitionsObj testComp4 = new UserCompetitionsObj("Competition 4", "4/12/2021", "6/12/2021");
-        UserCompetitionsObj testComp5 = new UserCompetitionsObj("Competition 5", "4/01/2021", "5/01/2021");
-        UserCompetitionsObj testComp6 = new UserCompetitionsObj("Competition 6", "5/01/2021", "7/01/2021");
-        UserCompetitionsObj testComp7 = new UserCompetitionsObj("Competition 7", "4/11/2021", "5/30/2021");
-        UserCompetitionsObj testComp8 = new UserCompetitionsObj("Competition 8", "3/01/2021", "6/01/2021");
-        UserCompetitionsObj testComp9 = new UserCompetitionsObj("Competition 9", "5/21/2021", "6/21/2021");
-        UserCompetitionsObj testComp10 = new UserCompetitionsObj("Competition 10", "4/21/2021", "6/21/2021");
-        UserCompetitionsObj testComp11 = new UserCompetitionsObj("", "", "");
-        UserCompetitionsObj testComp12 = new UserCompetitionsObj("", "", "");
-        temp.add(testComp1);
-        temp.add(testComp2);
-        temp.add(testComp3);
-        temp.add(testComp4);
-        temp.add(testComp5);
-        temp.add(testComp6);
-        temp.add(testComp7);
-        temp.add(testComp8);
-        temp.add(testComp9);
-        temp.add(testComp10);
-        temp.add(testComp11);
-        temp.add(testComp12);
-         */
 
         FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("UserCompetitions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
