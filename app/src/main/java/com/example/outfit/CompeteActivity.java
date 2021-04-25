@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class CompeteActivity extends AppCompatActivity implements SensorEventListener {
 
+    //Compete
     SensorManager stepSensor;
     TextView steps;
     Button startStop;
