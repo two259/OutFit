@@ -71,17 +71,32 @@ public class JoinCompetitionActivity extends AppCompatActivity implements View.O
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     DataSnapshot snapshot = task.getResult();
                     ArrayList tempList = (ArrayList) snapshot.getValue();
-                    int indexToAdd = tempList.size();
-                    FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).child("UserCompetitions").child(String.valueOf(indexToAdd)).setValue(temp);
-                    FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(compID)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DataSnapshot> task) {
-                            DataSnapshot dataSnapshot = task.getResult();
-                            ArrayList temp2 = (ArrayList) dataSnapshot.child("userList").getValue();
-                            int sz = temp2.size();
-                            FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(compID)).child("userList").child(String.valueOf(sz)).child("userID").setValue(FirebaseAuth.getInstance().getUid());
-                        }
-                    });
+                    if(tempList == null){
+                        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).child("UserCompetitions").child(String.valueOf(0)).setValue(temp);
+                        FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(compID)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                DataSnapshot dataSnapshot = task.getResult();
+                                ArrayList temp2 = (ArrayList) dataSnapshot.child("userList").getValue();
+                                int sz = temp2.size();
+                                FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(compID)).child("userList").child(String.valueOf(sz)).child("userID").setValue(FirebaseAuth.getInstance().getUid());
+                            }
+                        });
+                    }
+                    else{
+                        int indexToAdd = tempList.size();
+                        FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).child("UserCompetitions").child(String.valueOf(indexToAdd)).setValue(temp);
+                        FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(compID)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                DataSnapshot dataSnapshot = task.getResult();
+                                ArrayList temp2 = (ArrayList) dataSnapshot.child("userList").getValue();
+                                int sz = temp2.size();
+                                FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(compID)).child("userList").child(String.valueOf(sz)).child("userID").setValue(FirebaseAuth.getInstance().getUid());
+                            }
+                        });
+                    }
+
                 }
             });
             this.startActivity(loadSuccessScreen);
