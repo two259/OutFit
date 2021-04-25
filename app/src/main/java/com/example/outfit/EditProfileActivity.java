@@ -6,18 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class EditProfileActivity extends AppCompatActivity {
 
     ImageView picture;
-    TextView firstName;
-    TextView lastName;
-    TextView username;
-    TextView email;
+    EditText firstName;
+    EditText lastName;
+    EditText username;
+    EditText email;
     Button changeButton;
 
     @Override
@@ -26,10 +24,10 @@ public class EditProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_profile);
 
         picture = (ImageView) findViewById(R.id.edit_picture);
-        firstName = (TextView) findViewById(R.id.edit_firstName);
-        lastName = (TextView) findViewById(R.id.edit_lastName);
-        username = (TextView) findViewById(R.id.edit_username);
-        email = (TextView) findViewById(R.id.edit_email);
+        firstName = (EditText) findViewById(R.id.edit_firstName);
+        lastName = (EditText) findViewById(R.id.edit_lastName);
+        username = (EditText) findViewById(R.id.edit_username);
+        email = (EditText) findViewById(R.id.edit_email);
         changeButton = (Button) findViewById(R.id.confirm_change);
 
     }
