@@ -98,6 +98,8 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
             }
             Competition currCompetition = new Competition(compName, eventDesc, startDate, endDate, competitionType, 0);
 
+            Toast.makeText(this, "Creating Event", Toast.LENGTH_SHORT).show();
+
             FirebaseDatabase.getInstance().getReference("numcompetitions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -139,13 +141,12 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
                                 });
                                 numCompetitions++;
                                 FirebaseDatabase.getInstance().getReference("numcompetitions").setValue(numCompetitions);
+                                CreateCompActivity.this.startActivity(loadSuccessScreen);
                             }
                         }
                     });
                 }
             }, 2000);
-
-            this.startActivity(loadSuccessScreen);
         }
     }
 }

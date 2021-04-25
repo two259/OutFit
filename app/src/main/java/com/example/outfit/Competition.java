@@ -54,4 +54,8 @@ public class Competition {
     public List<UserInComp> getUserList(){
         return userList;
     }
+
+    public void setUserList(List<UserInComp> newList){
+        this.userList = newList;
+    }
 }

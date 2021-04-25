@@ -100,7 +100,6 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
                     }
                     else{
                         String data = task.getResult().getValue().toString();
-                        System.out.println(data);
                         parseData(data);
                         if(data.equals("")) System.out.println("Blank");
                         adapter = new InCompetitionAdapter(CompetitionsInActivity.this, temp, CompetitionsInActivity.this);
@@ -134,6 +133,8 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
     @Override
     public void onClick(View v) {
         if(searchButton.getId() == v.getId()){ // Search button
+            String searchText = searchBar.getText().toString();
+            loadSearchComp.putExtra("Searched", searchText);
             this.startActivity(loadSearchComp);
         }
         else if(createButton.getId() == v.getId()){ // Create button
