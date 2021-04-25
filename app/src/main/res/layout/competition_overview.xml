@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#353535"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/compNameText"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:text="CompetitionName"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/numMembersText"
+        android:layout_width="318dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="24dp"
+        android:text="Number of Members:"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/compNameText" />
+
+    <TextView
+        android:id="@+id/topLeaders"
+        android:layout_width="320dp"
+        android:layout_height="254dp"
+        android:layout_marginTop="24dp"
+        android:text="Top X:"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/numMembersText" />
+
+    <Button
+        android:id="@+id/buttonLeaderboard"
+        android:layout_width="316dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:text="View Full Leaderboard"
+        android:backgroundTint="#00BCD4"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topLeaders" />
+
+    <Button
+        android:id="@+id/buttonCompete"
+        android:layout_width="316dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="12dp"
+        android:text="Compete!"
+        android:backgroundTint="#8BC34A"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonLeaderboard" />
+</androidx.constraintlayout.widget.ConstraintLayout>
