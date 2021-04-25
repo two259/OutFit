@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:backgroundTint="#94B4B8"
+                android:onClick="loadEditProfile"
                 android:text="Edit Profile" />
 
             <Button
