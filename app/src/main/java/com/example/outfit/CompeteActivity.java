@@ -18,6 +18,7 @@ public class CompeteActivity extends AppCompatActivity implements SensorEventLis
     TextView steps;
     Button startStop;
     boolean running = false;
+    int totalSteps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class CompeteActivity extends AppCompatActivity implements SensorEventLis
         setContentView(R.layout.compete_activity);
         steps = findViewById(R.id.stepCounter);
         startStop = findViewById(R.id.startStopButton);
+        totalSteps = 0;
         stepSensor = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }
 
@@ -50,7 +52,8 @@ public class CompeteActivity extends AppCompatActivity implements SensorEventLis
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(running){
-            steps.setText(String.valueOf(event.values[0]));
+            totalSteps = (int) (totalSteps + event.values[0]);
+            steps.setText(String.valueOf(totalSteps));
         }
     }
 
