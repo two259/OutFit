@@ -35,12 +35,16 @@ public class CompetitionOverviewActivity extends AppCompatActivity implements Vi
 
         // Make intents
         loadLeaderboard = new Intent(this, FullLeaderboardActivity.class);
+        loadCompete = new Intent(this, CompeteActivity.class);
     }
 
     @Override
     public void onClick(View v) {
         if(v.getId() == leaderboard.getId()){
             this.startActivity(loadLeaderboard);
+        }
+        else if(v.getId() == compete.getId()){
+            this.startActivity(loadCompete);
         }
     }
 }
