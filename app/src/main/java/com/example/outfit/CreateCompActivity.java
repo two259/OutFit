@@ -1,5 +1,6 @@
 package com.example.outfit;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,6 +8,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +24,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class CreateCompActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,8 +37,12 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
     Button createCompetition;
     TextView competitionDescription;
     Intent loadSuccessScreen;
-    TextView startDateText;
-    TextView endDateText;
+
+    final Calendar myCalendar = Calendar.getInstance();
+    DatePickerDialog.OnDateSetListener startDateDialog;
+    DatePickerDialog.OnDateSetListener endDateDialog;
+    EditText startDateText;
+    EditText endDateText;
     // Need to add stuff for radio buttons.
     RadioButton walkButton;
     RadioButton runButton;
@@ -46,8 +56,8 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
 
         competitionName = findViewById(R.id.competitionNameText);
         competitionDescription = findViewById(R.id.eventDescText);
-        startDateText = findViewById(R.id.startDateText);
-        endDateText = findViewById(R.id.endDateText);
+        startDateText = (EditText) findViewById(R.id.startDateText);
+        endDateText = (EditText) findViewById(R.id.endDateText);
         createCompetition = findViewById(R.id.createEventButton);
 
         createCompetition.setOnClickListener(this);
@@ -58,7 +68,68 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
 
         loadHomeScreen = new Intent(this, HomeActivity.class);
         loadSuccessScreen = new Intent(this, CompCreateJoinSuccessActivity.class);
+
+
+        //set up a date dialog for start date
+        startDateDialog = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String myFormat = "MM/dd/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                startDateText.setText(sdf.format(myCalendar.getTime()));
+            }
+
+        };
+
+        //set up a date dialog for end date
+        endDateDialog = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                String myFormat = "MM/dd/yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+                endDateText.setText(sdf.format(myCalendar.getTime()));
+            }
+
+        };
+
     }
+
+    /**
+     * date picker will pop up for start date
+     * @param view
+     */
+    public void clickStartDate(View view){
+        new DatePickerDialog(CreateCompActivity.this, startDateDialog, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    /**
+     * date picker will pop up for end date
+     * @param view
+     */
+    public void clickEndDate(View view){
+        new DatePickerDialog(CreateCompActivity.this, endDateDialog, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
 
     @Override
     public void onClick(View v) {
