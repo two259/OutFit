@@ -27,6 +27,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     Intent loadInCompetitionsScreen;
     Intent loadHomeScreen;
     Intent loadEditProfile;
+    Intent loadSocialScreen;
 
     TextView username;
     TextView userEmail;
@@ -48,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         loadInCompetitionsScreen = new Intent(this, CompetitionsInActivity.class);
         loadHomeScreen = new Intent(this, HomeActivity.class);
         loadEditProfile = new Intent(this, EditProfileActivity.class);
+        loadSocialScreen = new Intent(this, SocialActivity.class);
 
         // screen view setup
         username = findViewById(R.id.username);
@@ -74,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             this.startActivity(loadInCompetitionsScreen);
         }
         else if(id == 2){
-
+            this.startActivity(loadSocialScreen);
         }
         else if(id == 3){
             //in profile screen
@@ -96,6 +98,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     }
                     else if(item.getItemId() == R.id.navigation_social){ // Social/Messages tab
                         //System.out.println("Social");
+                        startActivities(2);
                         return true;
                     }
                     else if(item.getItemId() == R.id.navigation_profile){ // Profile tab

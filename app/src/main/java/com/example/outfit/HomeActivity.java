@@ -30,6 +30,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     BottomNavigationView bnv;
     Intent loadInCompetitionsScreen;
     Intent loadCreateComp;
+    Intent loadSocialScreen;
     Button createCompetition;
     Intent profileActivity;
     RecyclerView homeRecycler;
@@ -61,6 +62,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         loadInCompetitionsScreen = new Intent(this, CompetitionsInActivity.class);
         loadCreateComp = new Intent(this, CreateCompActivity.class);
+        loadSocialScreen = new Intent(this, SocialActivity.class);
 
         profileActivity = new Intent(this, ProfileActivity.class);
     }
@@ -80,7 +82,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             this.startActivity(loadInCompetitionsScreen);
         }
         else if(id == 2){
-
+            this.startActivity(loadSocialScreen);
         }
         else if(id == 3){
             this.startActivity(profileActivity);
@@ -101,6 +103,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     else if(item.getItemId() == R.id.navigation_social){ // Social/Messages tab
                         //System.out.println("Social");
+                        startActivities(2);
                         return true;
                     }
                     else if(item.getItemId() == R.id.navigation_profile){ // Profile tab

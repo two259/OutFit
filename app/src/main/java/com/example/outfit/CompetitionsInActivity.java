@@ -37,6 +37,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
 
     Intent loadCreateComp;
     Intent loadSearchComp;
+    Intent loadSocialScreen;
     Intent loadProfile;
 
     List<UserCompetitionsObj> temp;
@@ -50,6 +51,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
         bnv.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         bnv.setSelectedItemId(R.id.navigation_competitions);
         loadHomeScreen = new Intent(this, HomeActivity.class);
+        loadSocialScreen = new Intent(this, SocialActivity.class);
         rv = findViewById(R.id.in_competition_rec);
 
         searchBar = findViewById(R.id.searchBarComp);
@@ -129,6 +131,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
                     }
                     else if(item.getItemId() == R.id.navigation_social){ // Social/Messages tab
                         //System.out.println("Social");
+                        startActivities(2);
                         return true;
                     }
                     else if(item.getItemId() == R.id.navigation_profile){ // Profile tab
@@ -148,7 +151,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
             // Already at competitions. Do nothing
         }
         else if(id == 2){
-
+            this.startActivity(loadSocialScreen);
         }
         else if(id == 3){
             this.startActivity(loadProfile);
