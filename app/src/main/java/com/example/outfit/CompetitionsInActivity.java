@@ -197,7 +197,6 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
             }
             else{
                 String curr = checker[i];
-                System.out.println(curr);
                 String[] secondSplitter = curr.split(",");
                 int equalIndex = secondSplitter[1].indexOf("=");
                 String endDate = secondSplitter[1].substring(equalIndex + 1, secondSplitter[1].length());
