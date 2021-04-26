@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +12,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     BottomNavigationView bnv;
@@ -23,6 +32,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     TextView userEmail;
     ImageView profileImage;
     Button editProfileButton;
+
+    MyAsyncTask myAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +55,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profileImage = findViewById(R.id.profileImage);
         editProfileButton = findViewById(R.id.editProfile);
         editProfileButton.setOnClickListener(this);
+
+        myAsyncTask = new MyAsyncTask();
+        myAsyncTask.execute();
 
     }
 
@@ -98,6 +112,39 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if(v.getId() == editProfileButton.getId()){
             this.startActivity(loadEditProfile);
+        }
+    }
+
+    public void updateViews(String user, String email){
+        username.setText("UserName: "+user);
+        userEmail.setText("Email: "+email);
+    }
+
+    private class MyAsyncTask extends AsyncTask<Integer, Integer, Void> {
+
+        @Override
+        protected Void doInBackground(Integer... params) {
+            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    DataSnapshot snapshot = task.getResult();
+                    String username = snapshot.child("userName").getValue().toString();
+                    String email = snapshot.child("email").getValue().toString();
+                    System.out.println("Here");
+                    updateViews(username, email);
+                }
+            });
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+
         }
     }
 }
