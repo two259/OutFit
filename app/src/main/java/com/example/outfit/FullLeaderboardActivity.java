@@ -20,7 +20,16 @@ public class FullLeaderboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.full_leaderboard);
 
+        String extra = getIntent().getStringExtra("LeaderboardData");
+
         List<LeaderboardItem> temp = new ArrayList<LeaderboardItem>();
+
+        String[] split = extra.split(",");
+        for(int i = 0; i < split.length; i++){
+            String[] split2 = split[i].split(" ");
+            LeaderboardItem tempItem = new LeaderboardItem(split2[0], Integer.valueOf(split2[1]));
+            temp.add(tempItem);
+        }
 
         leaderRV = findViewById(R.id.leader_recycler);
         fla = new FullLeaderboardAdapter(this, temp);

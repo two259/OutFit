@@ -58,6 +58,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
 
         searchButton.setOnClickListener(this);
         createButton.setOnClickListener(this);
+        loadProfile = new Intent(this, ProfileActivity.class);
 
         temp = new ArrayList<UserCompetitionsObj>();
 
@@ -98,8 +99,6 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
         adapter.notifyDataSetChanged();
         loadCreateComp = new Intent(this, CreateCompActivity.class);
         loadSearchComp = new Intent(this, SearchCompActivity.class);
-        loadProfile = new Intent(this, ProfileActivity.class);
-        //System.out.println("List size: " +temp.size());
     }
 
 
@@ -134,6 +133,7 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
                     }
                     else if(item.getItemId() == R.id.navigation_profile){ // Profile tab
                         //System.out.println("Profile");
+                        startActivities(3);
                         return true;
                     }
                     return false;
@@ -159,7 +159,9 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
     public void clickedInCompItem(int position) {
         // Remember to get other info needed from the position index and send it.
 
-        Intent loadCompScreen = new Intent(this, JoinCompetitionActivity.class); // Change the class when its made.
+        Intent loadCompScreen = new Intent(this, CompetitionOverviewActivity.class);
+        loadCompScreen.putExtra("CompID", temp.get(position).getCompetitionID());
+        loadCompScreen.putExtra("CompName", temp.get(position).getCompetitionName());
         this.startActivity(loadCompScreen);
     }
 
@@ -172,9 +174,13 @@ public class CompetitionsInActivity extends AppCompatActivity implements InCompe
 
     private void parseData(String data){
         String[] checker = data.split("\\}"); // This will count how many items there are to parse.
+        //System.out.println(data);
         int numRecords = checker.length;
         for(int i = 0; i < numRecords - 1; i++){
-            if(i == 0){
+            if(checker[i] == null){
+
+            }
+            else if(i == 0){
                 String curr = checker[i];
                 String[] secondSplitter = curr.split(",");
                 int equalIndex = secondSplitter[0].indexOf("=");

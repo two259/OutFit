@@ -4,15 +4,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class ProfileActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
+
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     BottomNavigationView bnv;
     Intent loadInCompetitionsScreen;
     Intent loadHomeScreen;
@@ -21,13 +31,16 @@ public class ProfileActivity extends AppCompatActivity {
     TextView username;
     TextView userEmail;
     ImageView profileImage;
+    Button editProfileButton;
+
+    MyAsyncTask myAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        //navigation bar setup
+        // navigation bar setup
         bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         bnv.setSelectedItemId(R.id.navigation_profile);
@@ -35,23 +48,19 @@ public class ProfileActivity extends AppCompatActivity {
         loadInCompetitionsScreen = new Intent(this, CompetitionsInActivity.class);
         loadHomeScreen = new Intent(this, HomeActivity.class);
         loadEditProfile = new Intent(this, EditProfileActivity.class);
-        //screen view setup
+
+        // screen view setup
         username = findViewById(R.id.username);
         userEmail = findViewById(R.id.userEmail);
         profileImage = findViewById(R.id.profileImage);
+        editProfileButton = findViewById(R.id.editProfile);
+        editProfileButton.setOnClickListener(this);
 
-        //dummy data
-        username.setText(String.format("%15s", "UserID: ") + "kenling");
-        userEmail.setText(String.format("%15s", "UserEmail: ") + "kenling@vt.edu");
+        myAsyncTask = new MyAsyncTask();
+        myAsyncTask.execute();
+
     }
 
-    /**
-     * go to edit_profile_activity
-     * @param view
-     */
-    public void loadEditProfile(View view){
-        startActivity(loadEditProfile);
-    }
 
     /**
      * switch screens through bottom navgation bar
@@ -98,4 +107,44 @@ public class ProfileActivity extends AppCompatActivity {
                     return false;
                 }
             };
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == editProfileButton.getId()){
+            this.startActivity(loadEditProfile);
+        }
+    }
+
+    public void updateViews(String user, String email){
+        username.setText("UserName: "+user);
+        userEmail.setText("Email: "+email);
+    }
+
+    private class MyAsyncTask extends AsyncTask<Integer, Integer, Void> {
+
+        @Override
+        protected Void doInBackground(Integer... params) {
+            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    DataSnapshot snapshot = task.getResult();
+                    String username = snapshot.child("userName").getValue().toString();
+                    String email = snapshot.child("email").getValue().toString();
+                    System.out.println("Here");
+                    updateViews(username, email);
+                }
+            });
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+
+        }
+    }
 }

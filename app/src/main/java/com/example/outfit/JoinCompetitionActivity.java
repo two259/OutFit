@@ -79,7 +79,8 @@ public class JoinCompetitionActivity extends AppCompatActivity implements View.O
                                 DataSnapshot dataSnapshot = task.getResult();
                                 ArrayList temp2 = (ArrayList) dataSnapshot.child("userList").getValue();
                                 int sz = temp2.size();
-                                FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(compID)).child("userList").child(String.valueOf(sz)).child("userID").setValue(FirebaseAuth.getInstance().getUid());
+                                UserInComp tempuser = new UserInComp(FirebaseAuth.getInstance().getUid(), 0);
+                                FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(compID)).child("userList").child(String.valueOf(sz)).setValue(tempuser);
                             }
                         });
                     }
@@ -92,7 +93,8 @@ public class JoinCompetitionActivity extends AppCompatActivity implements View.O
                                 DataSnapshot dataSnapshot = task.getResult();
                                 ArrayList temp2 = (ArrayList) dataSnapshot.child("userList").getValue();
                                 int sz = temp2.size();
-                                FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(compID)).child("userList").child(String.valueOf(sz)).child("userID").setValue(FirebaseAuth.getInstance().getUid());
+                                UserInComp tempuser = new UserInComp(FirebaseAuth.getInstance().getUid(), 0);
+                                FirebaseDatabase.getInstance().getReference("Competition").child(String.valueOf(compID)).child("userList").child(String.valueOf(sz)).setValue(tempuser);
                             }
                         });
                     }
