@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegistrationActivity" />
+        <activity android:name=".SocialActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".CompetitionsInActivity" />
         <activity android:name=".CreateCompActivity" />
