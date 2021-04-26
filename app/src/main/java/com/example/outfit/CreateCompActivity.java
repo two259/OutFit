@@ -119,7 +119,7 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
                     currCompetition.setCompetitionID(numCompetitions);
                     List<UserInComp> tempList = currCompetition.getUserList();
                     String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    UserInComp tempUser = new UserInComp(userID);
+                    UserInComp tempUser = new UserInComp(userID, 0);
                     tempList.add(tempUser);
                     FirebaseDatabase.getInstance().getReference("Competition")
                             .child(String.valueOf(numCompetitions))

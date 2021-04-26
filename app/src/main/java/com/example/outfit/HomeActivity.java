@@ -189,7 +189,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         protected boolean checkInList(ArrayList list){
             for(int i = 0; i < list.size(); i++){
                 String name = list.get(i).toString();
-                String editName = name.substring(name.indexOf("=") + 1, name.length() - 1);
+                String[] scoreSplit = name.split(",");
+                String editName = scoreSplit[1].substring(scoreSplit[1].indexOf("=") + 1, scoreSplit[1].length() - 1);
                 if(FirebaseAuth.getInstance().getCurrentUser().getUid().equals(editName)){
                     return true;
                 }

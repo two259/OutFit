@@ -7,12 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     BottomNavigationView bnv;
     Intent loadInCompetitionsScreen;
     Intent loadHomeScreen;
@@ -21,13 +22,14 @@ public class ProfileActivity extends AppCompatActivity {
     TextView username;
     TextView userEmail;
     ImageView profileImage;
+    Button editProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        //navigation bar setup
+        // navigation bar setup
         bnv = findViewById(R.id.bottom_navigation);
         bnv.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
         bnv.setSelectedItemId(R.id.navigation_profile);
@@ -35,23 +37,16 @@ public class ProfileActivity extends AppCompatActivity {
         loadInCompetitionsScreen = new Intent(this, CompetitionsInActivity.class);
         loadHomeScreen = new Intent(this, HomeActivity.class);
         loadEditProfile = new Intent(this, EditProfileActivity.class);
-        //screen view setup
+
+        // screen view setup
         username = findViewById(R.id.username);
         userEmail = findViewById(R.id.userEmail);
         profileImage = findViewById(R.id.profileImage);
+        editProfileButton = findViewById(R.id.editProfile);
+        editProfileButton.setOnClickListener(this);
 
-        //dummy data
-        username.setText(String.format("%15s", "UserID: ") + "kenling");
-        userEmail.setText(String.format("%15s", "UserEmail: ") + "kenling@vt.edu");
     }
 
-    /**
-     * go to edit_profile_activity
-     * @param view
-     */
-    public void loadEditProfile(View view){
-        startActivity(loadEditProfile);
-    }
 
     /**
      * switch screens through bottom navgation bar
@@ -98,4 +93,11 @@ public class ProfileActivity extends AppCompatActivity {
                     return false;
                 }
             };
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == editProfileButton.getId()){
+            this.startActivity(loadEditProfile);
+        }
+    }
 }
