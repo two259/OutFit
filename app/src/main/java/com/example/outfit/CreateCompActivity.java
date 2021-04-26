@@ -206,7 +206,13 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
                                         DataSnapshot snapshot = task.getResult();
                                         ArrayList<UserCompetitionsObj> temp = (ArrayList<UserCompetitionsObj>) snapshot.getValue();
-                                        int index = temp.size();
+                                        int index = 0;
+                                        if(temp == null){
+                                            index = 0;
+                                        }
+                                        else{
+                                            index = temp.size();
+                                        }
                                         FirebaseDatabase.getInstance().getReference("Users")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("UserCompetitions").child(String.valueOf(index))
                                                 .setValue(tempUserObj).addOnCompleteListener(new OnCompleteListener<Void>() {
