@@ -82,7 +82,6 @@
         android:layout_height="62dp"
         android:layout_marginBottom="156dp"
         android:backgroundTint="#00BCD4"
-        android:onClick="confirmChange"
         android:text="Confirm Change"
         android:textSize="18sp"
         android:textStyle="bold"

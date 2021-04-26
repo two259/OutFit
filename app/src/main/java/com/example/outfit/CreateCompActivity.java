@@ -25,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -200,14 +201,22 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
                             if (task.isSuccessful()){
                                 Toast.makeText(CreateCompActivity.this, "Successfully Created", Toast.LENGTH_LONG).show();
                                 UserCompetitionsObj tempUserObj = new UserCompetitionsObj(currCompetition.getCompetitionName(), currCompetition.getStartDate(), currCompetition.getEndDate(), currCompetition.getCompetitionID());
-                                FirebaseDatabase.getInstance().getReference("Users")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("UserCompetitions").child(String.valueOf(numCompetitions))
-                                        .setValue(tempUserObj).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).child("UserCompetitions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()){
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        DataSnapshot snapshot = task.getResult();
+                                        ArrayList<UserCompetitionsObj> temp = (ArrayList<UserCompetitionsObj>) snapshot.getValue();
+                                        int index = temp.size();
+                                        FirebaseDatabase.getInstance().getReference("Users")
+                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("UserCompetitions").child(String.valueOf(index))
+                                                .setValue(tempUserObj).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()){
 
-                                        }
+                                                }
+                                            }
+                                        });
                                     }
                                 });
                                 numCompetitions++;
