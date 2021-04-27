@@ -1,6 +1,7 @@
 package com.example.outfit;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,15 @@ public class SocialScreenAdapter extends RecyclerView.Adapter<SocialScreenAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         UserSocial user = users.get(position);
         holder.bind(user);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent message = new Intent(context, MessageActivity.class);
+                message.putExtra("userID", user.userID);
+                message.putExtra("userName", user.userName);
+                context.startActivity(message);
+            }
+        });
     }
 
     @Override

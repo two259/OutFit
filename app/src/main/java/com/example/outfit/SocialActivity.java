@@ -2,7 +2,9 @@ package com.example.outfit;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -26,7 +28,10 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     Intent loadCompScreen;
     Intent loadProfileScreen;
     BottomNavigationView bnv;
-    List<User> users;
+    List<UserSocial> users;
+    SocialScreenAdapter socialScreenAdapter;
+
+    MyAsyncTask myAsyncTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +42,12 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
         users = new ArrayList<>();
 
-        User userTemp = new User("test", "person", "test", "test@gmail.com", "testPassword");
-        users.add(userTemp);
 
-        SocialScreenAdapter socialScreenAdapter = new SocialScreenAdapter(this, users);
+
+        //UserSocial userTemp = new UserSocial("test", "1321413");
+        //users.add(userTemp);
+
+        socialScreenAdapter = new SocialScreenAdapter(this, users);
         social_rec.setAdapter(socialScreenAdapter);
         social_rec.setLayoutManager(new LinearLayoutManager(this));
 
@@ -51,6 +58,8 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
         loadCompScreen = new Intent(this,CompetitionsInActivity.class);
         loadProfileScreen = new Intent(this,ProfileActivity.class);
 
+        myAsyncTask = new MyAsyncTask();
+        myAsyncTask.execute();
     }
 
     @Override
@@ -62,13 +71,19 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
         @Override
         protected Void doInBackground(Integer... params) {
-            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            FirebaseDatabase.getInstance().getReference("Users").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     DataSnapshot snapshot = task.getResult();
-                    String username = snapshot.child("userName").getValue().toString();
-                    String email = snapshot.child("email").getValue().toString();
-                    System.out.println("Here");
+                    for (DataSnapshot shot: snapshot.getChildren()){
+                        users.add(new UserSocial(shot.getKey(), shot.child("userName").getValue().toString()));
+                    }
+
+                    socialScreenAdapter.notifyDataSetChanged();
+
+                    //String username = snapshot.child("userName").getValue().toString();
+                    //String email = snapshot.child("email").getValue().toString();
+                    //System.out.println("Here");
                     //updateViews(username, email);
                 }
             });

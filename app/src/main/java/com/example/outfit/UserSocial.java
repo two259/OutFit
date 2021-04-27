@@ -8,7 +8,7 @@ public class UserSocial {
 
     }
 
-    public UserSocial(String userName, String userID){
+    public UserSocial(String userID, String userName){
         this.userName = userName;
         this.userID = userID;
 
