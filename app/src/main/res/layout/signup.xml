@@ -12,7 +12,7 @@
 
     <TextView
         android:id="@+id/registerMessage"
-        android:layout_width="304dp"
+        android:layout_width="match_parent"
         android:layout_height="46dp"
         android:text="Register for a new account!"
         android:textAlignment="center"
