@@ -13,9 +13,9 @@ import java.util.List;
 
 public class SocialScreenAdapter extends RecyclerView.Adapter<SocialScreenAdapter.ViewHolder> {
     Context context;
-    List<User> users; //will need to change to user messaging
+    List<UserSocial> users; //will need to change to user messaging
 
-    public SocialScreenAdapter(Context context, List<User> list) {
+    public SocialScreenAdapter(Context context, List<UserSocial> list) {
         this.users = list;
         this.context = context;
     }
@@ -29,7 +29,7 @@ public class SocialScreenAdapter extends RecyclerView.Adapter<SocialScreenAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        User user = users.get(position);
+        UserSocial user = users.get(position);
         holder.bind(user);
     }
 
@@ -47,7 +47,7 @@ public class SocialScreenAdapter extends RecyclerView.Adapter<SocialScreenAdapte
             userName = itemView.findViewById(R.id.userName);
         }
 
-        public void bind(User user) {
+        public void bind(UserSocial user) {
             userName.setText(user.userName);
         }
     }
