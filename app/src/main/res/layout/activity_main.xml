@@ -7,7 +7,8 @@
     android:orientation="vertical"
     android:background="@drawable/background"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/main">
 
 
     <ProgressBar

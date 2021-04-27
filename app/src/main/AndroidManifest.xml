@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OutFit">
-        <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".MessageActivity" android:label="Chat" ></activity>
         <activity android:name=".EditProfileActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ProfileActivity" android:label="Profile"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +22,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegistrationActivity" />
-        <activity android:name=".SocialActivity" />
+        <activity android:name=".SocialActivity" android:label="Chat"/>
         <activity android:name=".HomeActivity" />
-        <activity android:name=".CompetitionsInActivity" />
-        <activity android:name=".CreateCompActivity" />
+        <activity android:name=".CompetitionsInActivity" android:label="Competitions"/>
+        <activity android:name=".CreateCompActivity" android:label="New Competition"/>
         <activity android:name=".SearchCompActivity" />
         <activity android:name=".CompCreateJoinSuccessActivity" />
         <activity android:name=".JoinCompetitionActivity" />

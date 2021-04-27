@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#353535"
     android:paddingStart="5dp"
-    android:paddingTop="10dp">
+    android:paddingTop="10dp"
+    android:background="@drawable/message_border">
 
     <TextView
         android:id="@+id/userName"
@@ -19,5 +19,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         tools:text="User Name" />
+
+
 
 </RelativeLayout>

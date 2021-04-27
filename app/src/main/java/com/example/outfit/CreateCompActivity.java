@@ -1,5 +1,6 @@
 package com.example.outfit;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,6 +49,7 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
     RadioButton walkButton;
     RadioButton runButton;
     RadioButton otherButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +111,17 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
 
         };
 
+    }
+
+    /**
+     * method for back button on the top
+     * @param item
+     * @return
+     */
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent myIntent = new Intent(getApplicationContext(), HomeActivity.class);
+        startActivityForResult(myIntent, 0);
+        return true;
     }
 
     /**
