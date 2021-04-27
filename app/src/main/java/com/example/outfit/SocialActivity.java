@@ -1,6 +1,7 @@
 package com.example.outfit;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,7 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +56,34 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
 
+    }
+
+    private class MyAsyncTask extends AsyncTask<Integer, Integer, Void> {
+
+        @Override
+        protected Void doInBackground(Integer... params) {
+            FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getUid()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                    DataSnapshot snapshot = task.getResult();
+                    String username = snapshot.child("userName").getValue().toString();
+                    String email = snapshot.child("email").getValue().toString();
+                    System.out.println("Here");
+                    //updateViews(username, email);
+                }
+            });
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+
+        }
     }
 
     BottomNavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
