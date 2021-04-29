@@ -28,7 +28,7 @@
                 android:hint="Enter the name of a competition"
                 android:inputType="textPersonName"
                 android:textColor="@color/white"
-                android:textColorHint="#A8A8A8" />
+                android:textColorHint="#FBFBFB" />
 
 
             <LinearLayout

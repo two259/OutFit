@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#353535">
+    android:background="@drawable/background">
 
     <TextView
         android:id="@+id/successMessage"
@@ -34,25 +34,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/successMessage" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/buttonToCompList"
         android:layout_width="278dp"
         android:layout_height="71dp"
         android:layout_marginTop="64dp"
         android:backgroundTint="#00BCD4"
         android:text="Awesome! Take me there!"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newEventMessage" />
 
-    <Button
+    <android.widget.Button
         android:id="@+id/buttonToHome"
         android:layout_width="210dp"
         android:layout_height="58dp"
         android:backgroundTint="#8BC34A"
         android:text="Return to Home"
         android:textStyle="bold"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

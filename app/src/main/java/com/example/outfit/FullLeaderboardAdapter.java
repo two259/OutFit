@@ -49,7 +49,8 @@ public class FullLeaderboardAdapter extends RecyclerView.Adapter<FullLeaderboard
         }
 
         public void bind(LeaderboardItem item) {
-            nameScore.setText("User: "+item.getUsername()+" -- Score: "+item.getScore());
+            //nameScore.setText(""+item.getUsername()+" "+item.getScore());
+            nameScore.setText(String.format("      %-15s%25s%-10s", item.getUsername(), " ", item.getScore()));
         }
 
     }

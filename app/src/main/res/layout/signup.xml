@@ -31,68 +31,68 @@
         android:inputType="textPersonName"
         android:textColor="@color/white"
 
-        android:textColorHint="#A8A8A8" />
+        android:textColorHint="#FFFFFF" />
 
     <EditText
         android:id="@+id/lastnameRegText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="Last Name"
         android:inputType="textPersonName"
-        android:layout_marginTop="16dp"
         android:textColor="@color/white"
-        android:textColorHint="#A8A8A8" />
+        android:textColorHint="#FFFBFB" />
 
     <EditText
         android:id="@+id/usernameRegText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="UserName"
-        android:layout_marginTop="16dp"
         android:inputType="textPersonName"
         android:textColor="@color/white"
-        android:textColorHint="#A8A8A8" />
+        android:textColorHint="#FFFFFF" />
 
     <EditText
         android:id="@+id/emailRegText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="E-mail"
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
-        android:textColorHint="#A8A8A8" />
+        android:textColorHint="#FDFCFC" />
 
 
     <EditText
         android:id="@+id/passwordRegText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPersonName"
         android:textColor="@color/white"
-        android:textColorHint="#A8A8A8" />
+        android:textColorHint="#FFFFFF" />
 
     <EditText
         android:id="@+id/confirmPasswordRegText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#FFFFFF"
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPersonName"
         android:textColor="@color/white"
-        android:textColorHint="#A8A8A8" />
+        android:textColorHint="#FFFFFF" />
 
     <android.widget.Button
         android:id="@+id/registerButton"

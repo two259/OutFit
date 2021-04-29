@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     TextView username;
     TextView userEmail;
-    ImageView profileImage;
+
     Button editProfileButton;
 
     MyAsyncTask myAsyncTask;
@@ -54,7 +54,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         // screen view setup
         username = findViewById(R.id.username);
         userEmail = findViewById(R.id.userEmail);
-        profileImage = findViewById(R.id.profileImage);
+
         editProfileButton = findViewById(R.id.editProfile);
         editProfileButton.setOnClickListener(this);
 
