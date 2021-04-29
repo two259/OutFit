@@ -143,7 +143,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             FirebaseDatabase.getInstance().getReference("numcompetitions").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if(task.getResult().getValue() == null) return;
+                    //if(task.getResult().getValue() == null) return;
                     numCompetitions = Integer.valueOf(String.valueOf(task.getResult().getValue()));
                     countDownLatch.countDown();
                 }

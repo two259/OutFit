@@ -54,6 +54,7 @@ public class CompeteActivity extends AppCompatActivity implements SensorEventLis
         super.onResume();
         running = true;
         Sensor sensorCount = stepSensor.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
+        // Sensor sensorCount2 = stepSensor.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if(sensorCount != null){
             stepSensor.registerListener(this, sensorCount, SensorManager.SENSOR_DELAY_UI);
         }
