@@ -41,16 +41,19 @@ public class FullLeaderboardAdapter extends RecyclerView.Adapter<FullLeaderboard
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameScore;
+        TextView name;
+        TextView score;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nameScore = itemView.findViewById(R.id.leader_item);
+            name = itemView.findViewById(R.id.leader_item);
+            score = itemView.findViewById(R.id.scoreText);
         }
 
         public void bind(LeaderboardItem item) {
             //nameScore.setText(""+item.getUsername()+" "+item.getScore());
-            nameScore.setText(String.format("      %-15s%25s%-10s", item.getUsername(), " ", item.getScore()));
+            name.setText(item.getUsername());
+            score.setText(item.getScore() +"");
         }
 
     }

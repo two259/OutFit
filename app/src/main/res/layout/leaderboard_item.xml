@@ -7,15 +7,27 @@
 
     <TextView
         android:id="@+id/leader_item"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="241dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="50dp"
         android:gravity="center_vertical"
 
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scoreText"
+        android:layout_width="149dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="40dp"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintStart_toEndOf="@+id/leader_item"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
