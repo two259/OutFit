@@ -54,7 +54,6 @@ public class CompeteActivity extends AppCompatActivity implements SensorEventLis
         super.onResume();
         running = true;
         Sensor sensorCount = stepSensor.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-        // Sensor sensorCount2 = stepSensor.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if(sensorCount != null){
             stepSensor.registerListener(this, sensorCount, SensorManager.SENSOR_DELAY_UI);
         }
@@ -71,6 +70,7 @@ public class CompeteActivity extends AppCompatActivity implements SensorEventLis
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        // Count the steps.
         if(running && startStop.getText().toString().equals("Stop")){
             totalSteps = (int) (totalSteps + event.values[0]);
             steps.setText(String.valueOf(totalSteps) + " Steps");

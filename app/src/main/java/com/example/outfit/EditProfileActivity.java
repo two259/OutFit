@@ -18,6 +18,8 @@ import org.w3c.dom.Text;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
+    // Using this activity, a user can update their profile.
+
     ImageView picture;
     TextView firstName;
     TextView lastName;

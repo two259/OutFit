@@ -33,6 +33,8 @@ import java.util.Locale;
 
 public class CreateCompActivity extends AppCompatActivity implements View.OnClickListener {
 
+    // This activity is where the user can create a new competition.
+
     int numCompetitions;
     Intent loadHomeScreen;
     TextView competitionName;
@@ -45,7 +47,7 @@ public class CreateCompActivity extends AppCompatActivity implements View.OnClic
     DatePickerDialog.OnDateSetListener endDateDialog;
     EditText startDateText;
     EditText endDateText;
-    // Need to add stuff for radio buttons.
+
     RadioButton walkButton;
     RadioButton runButton;
     RadioButton otherButton;

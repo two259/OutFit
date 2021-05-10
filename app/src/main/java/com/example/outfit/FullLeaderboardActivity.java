@@ -12,6 +12,8 @@ import java.util.List;
 
 public class FullLeaderboardActivity extends AppCompatActivity {
 
+    // This activity will provide a full leaderboard for each competition.
+
     RecyclerView leaderRV;
     FullLeaderboardAdapter fla;
 

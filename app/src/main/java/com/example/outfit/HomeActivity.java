@@ -27,6 +27,8 @@ import java.util.concurrent.CountDownLatch;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener, JoinableCompetitionAdapter.ClickJoinItemListener {
 
+    // This activity represents the home screen that the user will first arrive at after login.
+
     BottomNavigationView bnv;
     Intent loadInCompetitionsScreen;
     Intent loadCreateComp;

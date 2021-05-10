@@ -13,6 +13,9 @@ public class Competition {
     private int competitionID;
     private List<UserInComp> userList;
 
+    /**
+     * This class represents each competition, and its contents.
+     */
     public Competition(String name, String desc, String start, String end, String type, int compID){
         this.competitionName = name;
         this.compDescription = desc;

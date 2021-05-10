@@ -6,6 +6,9 @@ public class JoinableCompetitionObj {
     private String competitionEndDate;
     private int competitionID;
 
+    /**
+     * This is the class that stores the information for each joinable competition.
+     */
     public JoinableCompetitionObj(String name, String start, String end, int id){
         this.competitionName = name;
         this.competitionStartDate = start;

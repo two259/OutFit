@@ -27,6 +27,8 @@ import java.util.concurrent.ExecutionException;
 
 public class SearchCompActivity extends AppCompatActivity implements JoinableCompetitionAdapter.ClickJoinItemListener {
 
+    // The user can search for competitions, and even filter by words in the name.
+
     RecyclerView joinableCompetitions;
     JoinableCompetitionAdapter jca;
     int numCompetitions;

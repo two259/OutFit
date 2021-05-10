@@ -24,6 +24,8 @@ import java.util.concurrent.CountDownLatch;
 
 public class JoinCompetitionActivity extends AppCompatActivity implements View.OnClickListener{
 
+    // The user will use this activity to join new competitions.
+
     Button joinButton;
     TextView eventName;
     TextView eventDescription;

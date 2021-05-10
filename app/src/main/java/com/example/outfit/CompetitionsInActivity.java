@@ -27,6 +27,8 @@ import java.util.List;
 
 public class CompetitionsInActivity extends AppCompatActivity implements InCompetitionAdapter.ClickInCompItemListener, View.OnClickListener {
 
+    // This class is the activity that the user can see all of the competitions that they are registered in.
+
     Intent loadHomeScreen;
     BottomNavigationView bnv;
     RecyclerView rv;
